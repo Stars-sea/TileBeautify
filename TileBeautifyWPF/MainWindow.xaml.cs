@@ -25,4 +25,11 @@ namespace TileBeautifyWPF
             InitializeComponent();
         }
     }
+
+    public class OptionButton
+    {
+        public ImageSource ImageSource { get; set; }
+        public string      Content     { get; set; }
+        public string      Describe    { get; set; }
+    }
 }

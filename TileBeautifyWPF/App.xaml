@@ -4,18 +4,18 @@
              xmlns:local="clr-namespace:TileBeautifyWPF"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <!-- 部分是从糖君[bili uid: 8385275]学过来的(不是抄袭 233) -->
+        <!-- 从糖君那儿[bili uid: 8385275]学过来的(不是抄袭 233) -->
         <DataTemplate x:Key="OptionButtonTemplate" DataType="{x:Type local:OptionButton}">
-            <Border x:Name="Content">
+            <Border Background="Transparent" BorderBrush="Transparent" BorderThickness="2" x:Name="Content" Width="250" Height="100">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="70"/>
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <Image Source="{Binding Path=Image}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0"/>
+                    <Image Source="{Binding Path=ImageSource}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0"/>
                     <TextBlock HorizontalAlignment="Left"  VerticalAlignment="Center" Grid.Column="1">
-                        <Run Text="{Binding Path=Content}" FontSize="20"/>
+                        <Run Text="{Binding Path=Content}" FontSize="16"/>
                         <LineBreak/>
                         <Run Text="{Binding Path=Describe}" FontSize="12" Foreground="Gray"/>
                     </TextBlock>
@@ -23,7 +23,7 @@
             </Border>
             <DataTemplate.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="BorderThickness" Value="2" TargetName="Content"/>
+                    <Setter Property="BorderBrush" Value="LightGray" TargetName="Content"/>
                 </Trigger>
             </DataTemplate.Triggers>
         </DataTemplate>

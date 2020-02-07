@@ -22,8 +22,29 @@
             <Label Content="Tile Beautify" HorizontalAlignment="Center" FontFamily="MV Boli" FontSize="15" Foreground="{x:Static SystemParameters.WindowGlassBrush}"/>
         </Grid>
 
-        <Grid x:Name="MainBar" Grid.Row="1" Background="#99FFFFFF">
-            <local:OptionButton Content="123"/>
+        <Grid Grid.Row="1" Background="#CCFFFFFF">
+            <ListBox ItemsSource="{Binding}" x:Name="ListBox" Width="700" Height="350" VerticalAlignment="Bottom"
+                     BorderBrush="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="Transparent">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Width="{Binding ElementName=ListBox, Path=ActualWidth}"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <ContentPresenter ContentTemplate="{StaticResource OptionButtonTemplate}" Margin="15"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <local:OptionButton Content="应用程序磁贴" Describe="自定义应用程序磁贴的颜色"/>
+                <local:OptionButton Content="图片磁贴"     Describe="将图片放入开始菜单"/>
+                <!-- TODO: 加入其它按钮 -->
+            </ListBox>
         </Grid>
     </Grid>
 </Window>
