@@ -1,0 +1,31 @@
+﻿<Application x:Class="TileBeautifyWPF.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:TileBeautifyWPF"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <!-- 部分是从糖君[bili uid: 8385275]学过来的(不是抄袭 233) -->
+        <DataTemplate x:Key="OptionButtonTemplate" DataType="{x:Type local:OptionButton}">
+            <Border x:Name="Content">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Image Source="{Binding Path=Image}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0"/>
+                    <TextBlock HorizontalAlignment="Left"  VerticalAlignment="Center" Grid.Column="1">
+                        <Run Text="{Binding Path=Content}" FontSize="20"/>
+                        <LineBreak/>
+                        <Run Text="{Binding Path=Describe}" FontSize="12" Foreground="Gray"/>
+                    </TextBlock>
+                </Grid>
+            </Border>
+            <DataTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderThickness" Value="2" TargetName="Content"/>
+                </Trigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+    </Application.Resources>
+</Application>

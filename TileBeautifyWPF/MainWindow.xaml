@@ -1,0 +1,29 @@
+﻿<Window x:Class="TileBeautifyWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TileBeautifyWPF"
+        xmlns:interop="clr-namespace:Walterlv.Demo.Interop"
+        mc:Ignorable="d" interop:WindowBlur.IsEnabled="True"
+        Title="MainWindow" Height="450" Width="800" Background="#66FFFFFF" ResizeMode="CanMinimize" Icon="蓝点.ico">
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="-1" />
+    </WindowChrome.WindowChrome>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="TitleBar" Grid.Row="0">
+            <Image Source="Resources\icon.ico" HorizontalAlignment="Left"/>
+            <Label Content="Tile Beautify" HorizontalAlignment="Center" FontFamily="MV Boli" FontSize="15" Foreground="{x:Static SystemParameters.WindowGlassBrush}"/>
+        </Grid>
+
+        <Grid x:Name="MainBar" Grid.Row="1" Background="#99FFFFFF">
+            <local:OptionButton Content="123"/>
+        </Grid>
+    </Grid>
+</Window>

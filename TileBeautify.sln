@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TileBeautify", "TileBeautif
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenURL", "OpenURL\OpenURL.csproj", "{67A849E4-9C5A-45C5-8F53-C5628CAC9441}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TileBeautifyWPF", "TileBeautifyWPF\TileBeautifyWPF.csproj", "{6DAF1F07-ED1D-44FD-B924-B0C1D318BA13}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{67A849E4-9C5A-45C5-8F53-C5628CAC9441}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67A849E4-9C5A-45C5-8F53-C5628CAC9441}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67A849E4-9C5A-45C5-8F53-C5628CAC9441}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DAF1F07-ED1D-44FD-B924-B0C1D318BA13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DAF1F07-ED1D-44FD-B924-B0C1D318BA13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DAF1F07-ED1D-44FD-B924-B0C1D318BA13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DAF1F07-ED1D-44FD-B924-B0C1D318BA13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
