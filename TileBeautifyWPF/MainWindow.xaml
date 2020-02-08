@@ -35,7 +35,7 @@
                         <Setter Property="Template" Value="{StaticResource OptionButtonTemplate}"/>
                     </Style>
                 </ListBox.ItemContainerStyle>
-                <local:OptionButton x:Name="ReplaceIcon" Content="应用程序磁贴" Describe="自定义应用程序磁贴的颜色" Selected="ReplaceIcon_Selected"/>
+                <local:OptionButton x:Name="ReplaceIcon"  Content="应用程序磁贴" Describe="自定义应用程序磁贴的颜色" Selected="ReplaceIcon_Selected"/>
                 <local:OptionButton Content="图片磁贴"     Describe="将图片放入开始菜单"/>
                 <!-- TODO: 加入其它按钮 -->
             </ListBox>

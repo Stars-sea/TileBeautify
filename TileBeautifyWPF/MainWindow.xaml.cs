@@ -35,6 +35,7 @@ namespace TileBeautifyWPF
     public class OptionButton : ListBoxItem
     {
         public ImageSource ImageSource { get; set; }
+        //public string      Content     { get; set; }
         public string      Describe    { get; set; }
     }
 }

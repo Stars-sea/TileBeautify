@@ -10,15 +10,16 @@
             <SolidColorBrush x:Key="BackgroundColor" Color="#66FFFFFF"/>
             <SolidColorBrush x:Key="ForegroundColor" Color="#CCFFFFFF"/>
 
-            <ControlTemplate x:Key="OptionButtonTemplate" x:Name="Template" TargetType="{x:Type local:OptionButton}">
-                <Border Background="Transparent" BorderBrush="Transparent" BorderThickness="2" x:Name="Content" Width="250" Height="100">
+            <ControlTemplate x:Key="OptionButtonTemplate" TargetType="{x:Type local:OptionButton}">
+                <Border Background="Transparent" BorderBrush="Transparent" BorderThickness="2" x:Name="ContentBorder" 
+                        Width="250" Height="100">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="70"/>
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Image Source="{Binding ImageSource}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0"/>
+                        <Image Source="{Binding ImageSource}"  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0"/>
                         <TextBlock HorizontalAlignment="Left"  VerticalAlignment="Center" Grid.Column="1">
                             <Run Text="{Binding Content}"  FontSize="16"/>
                             <LineBreak/>
@@ -28,7 +29,7 @@
                 </Border>
                 <ControlTemplate.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="BorderBrush" Value="LightGray" TargetName="Content"/>
+                        <Setter Property="BorderBrush" Value="LightGray" TargetName="ContentBorder"/>
                     </Trigger>
                 </ControlTemplate.Triggers>
             </ControlTemplate>
