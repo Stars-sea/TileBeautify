@@ -1,0 +1,98 @@
+﻿<Page x:Class="TileBeautifyWPF.AboutAuthorPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TileBeautifyWPF"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="About aucher">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Label Content="Tile Beautify" HorizontalAlignment="Center" FontFamily="MV Boli" FontSize="15" 
+               Foreground="{x:Static SystemParameters.WindowGlassBrush}" Grid.Row="0"/>
+
+        <Grid x:Name="MainBar" Grid.Row="1" Background="{StaticResource ForegroundColor}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"  />
+            </Grid.ColumnDefinitions>
+            <ListBox HorizontalAlignment="Left" Grid.Column="0" Margin="0,50,0,0" BorderThickness="0" FontSize="15" 
+                     Background="Transparent">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListBoxItem}">
+                        <Setter Property="Template" Value="{StaticResource LeftOptionButtonTemplate}"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+
+                <ListBoxItem x:Name="InstructionItem" Content="说明" Selected="Instruction_Selected" IsSelected="True"/>
+                <ListBoxItem x:Name="AboutItem"       Content="关于" Selected="About_Selected"/>
+                <ListBoxItem x:Name="SponsorItem"     Content="赞助" Selected="Sponsor_Selected"/>
+            </ListBox>
+
+            <Grid x:Name="RightBar" Grid.Column="1" Background="White">
+                <TextBlock x:Name="Instruction" Margin="15,15,0,0">
+                    <Run Text="TileBeautity WPF" FontSize="30"/>
+                    <LineBreak/>
+                    <Run Text="                        原作者: 蓝点lilac    作者: Star sea" FontSize="11"/>
+                    <LineBreak/><LineBreak/>
+                    <Run Text="用途" FontSize="20"/>
+                    <LineBreak/>
+                    <Run Text="    Windows10 开始菜单磁贴美化" FontSize="15"/>
+                    <LineBreak/><LineBreak/>
+                    <Run Text="功能" FontSize="20"/>
+                    <LineBreak/>
+                    <Run Text="    ● 修改磁贴背景/前景" FontSize="15"/>
+                    <LineBreak/>
+                    <Run Text="    ● 制作 URL 磁贴" FontSize="15"/>
+                </TextBlock>
+
+                <TextBlock x:Name="About" Margin="15,15,0,0" Visibility="Collapsed">
+                    <Run Text="关于" FontSize="30"/>
+                    <LineBreak/><LineBreak/>
+                    
+                    <Run Text="License" FontSize="20"/>
+                    <LineBreak/>
+                    <Run Text="    MIT License" FontSize="15"/>
+                    
+                    <LineBreak/><LineBreak/>
+                    <Run Text="项目地址" FontSize="20"/>
+                    <LineBreak/>
+                    <Run Text="    主仓库: " FontSize="15"/>
+                    <Hyperlink NavigateUri="https://github.com/BluePointLilac/TileBeautify" FontSize="15">
+                        https://github.com/BluePointLilac/TileBeautify
+                    </Hyperlink>
+                    <LineBreak/>
+                    <Run Text="    子仓库: " FontSize="15"/>
+                    <Hyperlink NavigateUri="https://github.com/Stars-sea/TileBeautify" FontSize="15">
+                        https://github.com/Stars-sea/TileBeautify
+                    </Hyperlink>
+                    
+                    <LineBreak/><LineBreak/>
+                    <Run Text="原作者" FontSize="20"/><Run Text="  蓝点Lilac: 欢迎关注和赞助"/>
+                    <LineBreak/>
+                    <Run Text="    ● " FontSize="15"/>
+                    <Hyperlink NavigateUri="https://space.bilibili.com/34492771" FontSize="15">Bilibili space</Hyperlink>
+                    <LineBreak/>
+                    <Run Text="    ● " FontSize="15"/>
+                    <Hyperlink NavigateUri="https://github.com/BluePointLilac" FontSize="15">Github</Hyperlink>
+                    <LineBreak/><LineBreak/>
+                    <Run Text="小垃圾" FontSize="20"/><Run Text="  (此程序作者)"/>
+                    <LineBreak/>
+                    <Run Text="    ● " FontSize="15"/>
+                    <Hyperlink NavigateUri="https://space.bilibili.com/329963941" FontSize="15">Bilibili space</Hyperlink>
+                    <LineBreak/>
+                    <Run Text="    ● " FontSize="15"/>
+                    <Hyperlink NavigateUri="https://github.com/Stars-sea" FontSize="15">Github</Hyperlink>
+                </TextBlock>
+
+                <Image x:Name="Sponsor" Source="Resources/Payment_QR_code.png" Stretch="Uniform" Visibility="Collapsed"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

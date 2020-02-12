@@ -23,19 +23,22 @@ namespace TileBeautifyWPF
         public MainWindow()
         {
             InitializeComponent();
-            
         }
 
-        private void ReplaceIcon_Selected(object sender, RoutedEventArgs e)
+        private void ReplaceIcon_Selected(object sender, RoutedEventArgs e) => Content = new ReplaceIconPage();
+
+        private void PictureTile_Selected(object sender, RoutedEventArgs e)
         {
-            Content = new ReplaceIconPage();
+
         }
+
+        private void AboutAuthor_Selected(object sender, RoutedEventArgs e) => Content = new AboutAuthorPage();
     }
 
-    public class OptionButton : ListBoxItem
+    public class OptionButtonContent
     {
         public ImageSource ImageSource { get; set; }
-        //public string      Content     { get; set; }
+        public string      Content     { get; set; }
         public string      Describe    { get; set; }
     }
 }

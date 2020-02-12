@@ -7,24 +7,35 @@
     <Application.Resources>
         <!-- 部分从糖君那儿[bili uid: 8385275]学过来的(不是抄袭 233) -->
         <ResourceDictionary>
+            <!-- 窗口背景色 -->
             <SolidColorBrush x:Key="BackgroundColor" Color="#66FFFFFF"/>
+            <!-- Grid 透明度  -->
             <SolidColorBrush x:Key="ForegroundColor" Color="#CCFFFFFF"/>
 
-            <ControlTemplate x:Key="OptionButtonTemplate" TargetType="{x:Type local:OptionButton}">
-                <Border Background="Transparent" BorderBrush="Transparent" BorderThickness="2" x:Name="ContentBorder" 
-                        Width="250" Height="100">
+            <!-- 主窗口的按钮 -->
+            <ControlTemplate x:Key="OptionButtonTemplate" TargetType="{x:Type ListBoxItem}">
+                <Border Background="Transparent" BorderBrush="Transparent" BorderThickness="2" x:Name="ContentBorder" Margin="10">
                     <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="70"/>
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Image Source="{Binding ImageSource}"  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="0"/>
-                        <TextBlock HorizontalAlignment="Left"  VerticalAlignment="Center" Grid.Column="1">
-                            <Run Text="{Binding Content}"  FontSize="16"/>
-                            <LineBreak/>
-                            <Run Text="{Binding Describe}" FontSize="12" Foreground="Gray"/>
-                        </TextBlock>
+                        <ContentPresenter VerticalAlignment="Center" Grid.Column="1">
+                            <ContentPresenter.ContentTemplate>
+                                <DataTemplate DataType="{x:Type local:OptionButtonContent}">
+                                    <Grid Width="250" Height="100">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="70"/>
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <Image Source="{Binding ImageSource}" Grid.Column="0" 
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Column="1" VerticalAlignment="Center">
+                                            <Run Text="{Binding Content}" FontSize="14"/>
+                                            <LineBreak/>
+                                            <Run Text="{Binding Describe}" FontSize="12" Foreground="Gray"/>
+                                        </TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </ContentPresenter.ContentTemplate>
+                        </ContentPresenter>
                     </Grid>
                 </Border>
                 <ControlTemplate.Triggers>
@@ -34,8 +45,9 @@
                 </ControlTemplate.Triggers>
             </ControlTemplate>
 
+            <!-- 子窗口的侧边栏 -->
             <ControlTemplate x:Key="LeftOptionButtonTemplate" TargetType="{x:Type ListBoxItem}">
-                <Grid Height="40" Width="198">
+                <Grid Height="40" Width="198" Cursor="Hand">
                     <Rectangle x:Name="LeftRectangle" HorizontalAlignment="Left" Visibility="Hidden" Width="5" 
                                Height="25" Fill="{x:Static SystemParameters.WindowGlassBrush}"/>
                     <ContentPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="30,0,0,0"/>
@@ -46,6 +58,125 @@
                     </Trigger>
                 </ControlTemplate.Triggers>
             </ControlTemplate>
+
+            <!-- 按钮 (高仿 uwp) -->
+            <ControlTemplate x:Key="ButtonTemplate" TargetType="{x:Type Button}">
+                <Grid Background="{TemplateBinding Background}" x:Name="ButtonGrid">
+                    <Border BorderThickness="2" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" x:Name="ButtonBorder">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <ContentPresenter.ContentTemplate>
+                                <DataTemplate DataType="{x:Type s:String}">
+                                    <TextBlock Text="{Binding}" Margin="5,3,5,3" Foreground="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}, Path=Foreground}"/>
+                                </DataTemplate>
+                            </ContentPresenter.ContentTemplate>
+                        </ContentPresenter>
+                    </Border>
+                </Grid>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="BorderBrush" Value="Gray" TargetName="ButtonBorder"/>
+                    </Trigger>
+                    <Trigger Property="IsEnabled" Value="False">
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="Background" Value="LightGray" TargetName="ButtonGrid"/>
+                        <Setter Property="Opacity" Value="0.7"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+
+            <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="LightGray"/>
+                <Setter Property="Template" Value="{StaticResource ButtonTemplate}"/>
+            </Style>
+
+            <Style x:Key="ThemeButtonStyle" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="{x:Static SystemParameters.WindowGlassBrush}"/>
+                <Setter Property="Foreground" Value="WhiteSmoke"/>
+                <Setter Property="Template" Value="{StaticResource ButtonTemplate}"/>
+            </Style>
+
+            <!-- 同样也是模仿 uwp 输入框 -->
+            <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}">
+                <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+                <Setter Property="ScrollViewer.PanningMode"   Value="VerticalFirst"/>
+                <Setter Property="FocusVisualStyle"           Value="{x:Null}"/>
+                <Setter Property="Stylus.IsFlicksEnabled"     Value="False"/>
+                <Setter Property="HorizontalAlignment"        Value="Left"/>
+                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                <Setter Property="VerticalContentAlignment"   Value="Center"/>
+                <Setter Property="AllowDrop"    Value="True"/>
+                <Setter Property="MinWidth"     Value="200"/>
+                <Setter Property="MaxWidth"     Value="550"/>
+                <Setter Property="TextWrapping" Value="Wrap"/>
+                <Setter Property="MinHeight"    Value="23"/>
+                <Setter Property="FontSize"     Value="14"/>
+                <Setter Property="Margin"       Value="5,0,0,0"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TextBox}">
+                            <Border x:Name="TextBoxBorder" BorderBrush="LightGray" BorderThickness="2" SnapsToDevicePixels="True">
+                                <ScrollViewer x:Name="PART_ContentHost" MinWidth="200" MaxWidth="550" MinHeight="23" MaxHeight="280" 
+                                              HorizontalScrollBarVisibility="Hidden"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="BorderBrush" Value="Gray" TargetName="TextBoxBorder"/>
+                                </Trigger>
+                                <Trigger Property="IsFocused" Value="True">
+                                    <Setter Property="BorderBrush" Value="Gray" TargetName="TextBoxBorder"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!-- 选取颜色的按钮 -->
+            <Style x:Key="ColorButtonStyle" TargetType="{x:Type ListBoxItem}">
+                <Setter Property="Content" Value="{Binding Background, RelativeSource={RelativeSource Self}}"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                            <Grid Background="{TemplateBinding Background}"  Width="40" Height="40" Margin="2">
+                                <Border x:Name="Border" BorderThickness="2" BorderBrush="Transparent">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Grid x:Name="SelectedSign" Visibility="Collapsed" Background="Black" Grid.Column="1">
+                                            <TextBlock Text="L" Foreground="White" HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" FontFamily="Microsoft YaHei UI">
+                                                <TextBlock.RenderTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform ScaleY="1" ScaleX="-1"/>
+                                                        <SkewTransform AngleY="0" AngleX="0"/>
+                                                        <RotateTransform Angle="45"/>
+                                                        <TranslateTransform/>
+                                                    </TransformGroup>
+                                                </TextBlock.RenderTransform>
+                                            </TextBlock>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="BorderBrush" Value="Black" TargetName="Border"/>
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="BorderBrush" Value="Black" TargetName="Border"/>
+                                    <Setter Property="Visibility" Value="Visible" TargetName="SelectedSign"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -4,42 +4,127 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:TileBeautifyWPF"
+      xmlns:s="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Replace Icon">
+      d:DesignHeight="450" d:DesignWidth="800" Title="Replace Icon">
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
-        <!-- 手动标题栏 -->
-        <Grid x:Name="TitleBar" Grid.Row="0">
-            <Image Source="Resources\icon.ico" HorizontalAlignment="Left"/>
-            <Label Content="Tile Beautify" HorizontalAlignment="Center" FontFamily="MV Boli" FontSize="15" Foreground="{x:Static SystemParameters.WindowGlassBrush}"/>
-        </Grid>
+
+        <Label Content="Tile Beautify" HorizontalAlignment="Center" FontFamily="MV Boli" FontSize="15"
+               Foreground="{x:Static SystemParameters.WindowGlassBrush}" Grid.Row="0"/>
 
         <Grid x:Name="MainBar" Grid.Row="1" Background="{StaticResource ForegroundColor}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="*"  />
             </Grid.ColumnDefinitions>
-            <ListBox HorizontalAlignment="Left" Grid.Column="0" Margin="0,50,0,0" BorderThickness="0" FontSize="15" Background="Transparent">
+            <ListBox HorizontalAlignment="Left" Grid.Column="0" Margin="0,50,0,0" BorderThickness="0" FontSize="15" 
+                     Background="Transparent">
                 <ListBox.ItemContainerStyle>
                     <Style TargetType="{x:Type ListBoxItem}">
                         <Setter Property="Template" Value="{StaticResource LeftOptionButtonTemplate}"/>
                     </Style>
                 </ListBox.ItemContainerStyle>
-                
-                <ListBoxItem x:Name="FilePathItem" Content="文件路径"  Selected="FilePathItem_Selected"/>
-                <ListBoxItem x:Name="BgColorItem"  Content="背景颜色"  Selected="BgColorItem_Selected" />
-                <ListBoxItem x:Name="FgColorItem"  Content="前景颜色"  Selected="FgColorItem_Selected" />
-                <ListBoxItem x:Name="TileNameItem" Content="磁贴名称"  Selected="TileNameItem_Selected"/>
+
+                <ListBoxItem x:Name="FilePathItem" Content="路径"      Selected="FilePathItem_Selected"/>
+                <ListBoxItem x:Name="BgColorItem"  Content="背景"      Selected="BgColorItem_Selected"/>
+                <ListBoxItem x:Name="FgColorItem"  Content="前景颜色"  Selected="FgColorItem_Selected"/>
+                <ListBoxItem x:Name="TileNameItem" Content="名称"      Selected="TileNameItem_Selected"/>
                 <ListBoxItem x:Name="LogoPathItem" Content="Logo 路径" Selected="LogoPathItem_Selected"/>
             </ListBox>
 
-            <Grid Grid.Column="1" Background="WhiteSmoke"/>
+            <Grid x:Name="RightBar" Grid.Column="1" Background="White">
+                <Button x:Name="NextButton" Content="下一步" HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+                        Margin="25" Style="{StaticResource ThemeButtonStyle}" Click="NextButton_Click" IsEnabled="False"/>
+
+                <StackPanel x:Name="FilePath" Margin="20,20,0,0" Visibility="Collapsed" AllowDrop="True" Drop="FilePath_Drop">
+                    <Label Content="路径/链接" FontSize="25"/>
+                    <Label Content="输入应用程序路径/链接" FontSize="17"/>
+                    <Label Content="这不是有效的应用程序路径/链接" Foreground="Red" FontSize="13" x:Name="ErrorText" Visibility="Collapsed"/>
+                    <TextBox x:Name="UrlText" Style="{StaticResource TextBoxStyle}" PreviewDragOver="UrlText_PreviewDragOver" 
+                             PreviewDrop="UrlText_PreviewDragOver" LostFocus="UrlText_LostFocus" GotFocus="UrlText_GotFocus"/>
+                    <Button Content="浏览" Name="Browse"  Click="Browse_Click" HorizontalAlignment="Left" Style="{StaticResource ButtonStyle}" 
+                            Margin="5" AllowDrop="True" Drop="FilePath_Drop"/>
+                </StackPanel>
+
+                <StackPanel x:Name="BgColor" Margin="20,20,0,0" Visibility="Visible">
+                    <Label Content="背景" FontSize="25"/>
+                    <Label Content="选择磁贴的背景颜色" FontSize="17"/>
+                    <WrapPanel x:Name="CustomColorPanel" >
+                        <TextBox x:Name="ColorCode" Style="{StaticResource TextBoxStyle}" Text="{Binding Fill, ElementName=PreviewRect}"/>
+                        <Rectangle x:Name="PreviewRect" Width="26" Height="26"/>
+                    </WrapPanel>
+                    <!-- 这可肝死我了 😂 -->
+                    <ListBox ItemContainerStyle="{StaticResource ColorButtonStyle}" BorderBrush="Transparent"
+                             Width="359" HorizontalAlignment="Left" Margin="5,0,0,0" x:Name="ColorPlate">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="8"/>
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBoxItem Background="#FFB900"/>
+                        <ListBoxItem Background="#FF8C00"/>
+                        <ListBoxItem Background="#F7630C"/>
+                        <ListBoxItem Background="#CA5010"/>
+                        <ListBoxItem Background="#DA3B01"/>
+                        <ListBoxItem Background="#EC684F"/>
+                        <ListBoxItem Background="#D13438"/>
+                        <ListBoxItem Background="#FF4343"/>
+
+                        <ListBoxItem Background="#E74856"/>
+                        <ListBoxItem Background="#E81123"/>
+                        <ListBoxItem Background="#EA005E"/>
+                        <ListBoxItem Background="#C30052"/>
+                        <ListBoxItem Background="#E3008C"/>
+                        <ListBoxItem Background="#BF0077"/>
+                        <ListBoxItem Background="#C239B3"/>
+                        <ListBoxItem Background="#9A0089"/>
+
+                        <ListBoxItem Background="#0078D7" IsSelected="True"/>
+                        <ListBoxItem Background="#0063B1"/>
+                        <ListBoxItem Background="#8E8CD8"/>
+                        <ListBoxItem Background="#6B69D6"/>
+                        <ListBoxItem Background="#8764B8"/>
+                        <ListBoxItem Background="#744DA9"/>
+                        <ListBoxItem Background="#B146C2"/>
+                        <ListBoxItem Background="#881798"/>
+
+                        <ListBoxItem Background="#0099BC"/>
+                        <ListBoxItem Background="#2D7D9A"/>
+                        <ListBoxItem Background="#00B7C3"/>
+                        <ListBoxItem Background="#038387"/>
+                        <ListBoxItem Background="#00A589"/>
+                        <ListBoxItem Background="#018574"/>
+                        <ListBoxItem Background="#00CC6A"/>
+                        <ListBoxItem Background="#10893E"/>
+
+                        <ListBoxItem Background="#7A7574"/>
+                        <ListBoxItem Background="#5D5A58"/>
+                        <ListBoxItem Background="#68768A"/>
+                        <ListBoxItem Background="#515C6B"/>
+                        <ListBoxItem Background="#567C73"/>
+                        <ListBoxItem Background="#486860"/>
+                        <ListBoxItem Background="#498205"/>
+                        <ListBoxItem Background="#107C10"/>
+
+                        <ListBoxItem Background="#767676"/>
+                        <ListBoxItem Background="#4C4A48"/>
+                        <ListBoxItem Background="#69797E"/>
+                        <ListBoxItem Background="#4A5459"/>
+                        <ListBoxItem Background="#647C64"/>
+                        <ListBoxItem Background="#525E54"/>
+                        <ListBoxItem Background="#847545"/>
+                        <ListBoxItem Background="#7E735F"/>
+                    </ListBox>
+
+                    <Button x:Name="CustomColorButton" Content="自定义颜色" Click="CustomColorButton_Click"
+                                Style="{StaticResource ButtonStyle}" HorizontalAlignment="Left" Margin="5"/>
+                </StackPanel>
+            </Grid>
         </Grid>
     </Grid>
 </Page>
